@@ -8,6 +8,15 @@ class TodoItemsController < ApplicationController
         redirect_to @todo_list
     end
     
+    def destroy
+        @todo_item = @todo_list.todo_items.find(params[:id])
+        if @todo_item.destroy
+            flash[:success] = "Todo List Item Was Fucking Deleted"
+        else
+            flash[:error] = "You Fucked Up"
+        end 
+        redirect_to @todo_list
+    end 
     def set_todo_list
      @todo_list = TodoList.find(params[:todo_list_id])
     end
